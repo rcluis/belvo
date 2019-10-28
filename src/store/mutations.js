@@ -1,1 +1,5 @@
-export const mutations = {};
+export default {
+  setTopAlbums: (state, albums) => {
+    state.albums = albums;
+  },
+};
