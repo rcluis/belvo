@@ -19,6 +19,6 @@ COPY . /usr/src/app
 
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 5000
 
-CMD [ "http-server", "-p 3000", "dist" ]
+CMD [ "http-server", "-p 5000", "dist" ]
