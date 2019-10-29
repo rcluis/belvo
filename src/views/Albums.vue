@@ -21,10 +21,17 @@
         <v-col
           xl="5"
           sm="12"
-          v-for="album in albums"
+          v-for="album in paginatedAlbums"
           :key="album.id.attributes['im:id']"
         >
           <AlbumCard :album="album"></AlbumCard>
+        </v-col>
+        <v-col cols="12">
+          <v-pagination
+            v-model="page"
+            :length="totalPages"
+            circle
+          ></v-pagination>
         </v-col>
         <v-col
           v-if="albums.length === 0"
@@ -32,7 +39,6 @@
           class="text-center">
           <p>There are no albums with the searched criteria</p>
         </v-col>
-
       </v-row>
     </v-container>
 </template>
@@ -50,10 +56,22 @@ export default {
     AlbumCard,
     SearchBar,
   },
+  data: () => ({
+    page: 1,
+    pageSize: 10,
+  }),
   computed: {
     ...mapState(['albums']),
+    paginatedAlbums() {
+      const start = (this.page - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.albums.slice(start, end);
+    },
     filters() {
       return this.$store.getters.getFilters;
+    },
+    totalPages() {
+      return Math.abs(this.albums.length / this.pageSize);
     },
   },
   mounted() {
