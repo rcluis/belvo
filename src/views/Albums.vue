@@ -5,7 +5,7 @@
       class="albums">
       <v-row>
         <v-col sm="12">
-          <SearchBar />
+          <SearchBar @filterByText="filterByText"/>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapState } from 'vuex';
 import AlbumCard from '@/components/albums/AlbumCard.vue';
 import SearchBar from '@/components/albums/SearchBar.vue';
 
@@ -34,15 +34,18 @@ export default {
     SearchBar,
   },
   data: () => ({
-    albums: [],
     info: null,
   }),
+  computed: {
+    ...mapState(['albums']),
+  },
   mounted() {
-    axios
-      .get('https://itunes.apple.com/us/rss/topalbums/limit=100/json')
-      .then(({ data }) => {
-        this.albums = data.feed.entry;
-      });
+    this.$store.dispatch('fetchTopAlbums');
+  },
+  methods: {
+    filterByText(text) {
+      this.$store.dispatch('filterByText', text);
+    },
   },
 };
 </script>

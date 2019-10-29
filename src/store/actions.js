@@ -1,11 +1,13 @@
+import { getTopAlbums } from '@/services/music';
 
 export default {
   fetchTopAlbums: async ({ commit }) => {
-
+    const topAlbums = await getTopAlbums();
+    commit('initAlbums', topAlbums);
   },
-  filterByText: ({ commit, getters }, query) => {
-    console.log(getters);
+  filterByText: ({ commit, state }, text) => {
+    console.log(state.albums);
     console.log(commit);
-    console.log(query);
+    console.log(text);
   },
 };

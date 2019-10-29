@@ -8,7 +8,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    topAlbums: [],
+    albums: [],
+    initialAlbums: [],
   },
   mutations,
   actions,

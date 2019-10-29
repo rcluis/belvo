@@ -29,7 +29,7 @@ export default {
   props: {},
   methods: {
     filterByText() {
-      console.log(this.filterText);
+      this.$emit('filterByText', this.filterText);
     },
   },
 };
