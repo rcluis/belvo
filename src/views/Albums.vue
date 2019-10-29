@@ -1,22 +1,30 @@
 <template>
     <v-container
-      d-inline-flex
-      flex-row flex-wrap
+      justify="center"
       class="albums">
-      <v-row>
-        <v-col sm="12">
-          <SearchBar @filterByText="filterByText"/>
+      <v-row no-gutters>
+        <v-col cols="10">
+          <SearchBar
+            @filterByText="filterByText"
+            @clearSearchFilter="clearAlbums"
+          />
+        </v-col>
+        <v-col cols="2">
+          <Categories
+            :filters="filters"
+            @filterByCategory="filterByCategory"
+            @clearCategoryFilter="clearAlbums"
+          />
         </v-col>
       </v-row>
       <v-row justify="space-between">
         <v-col
-          lg="5"
+          xl="5"
           sm="12"
-          class="ma-2"
           v-for="album in albums"
           :key="album.id.attributes['im:id']"
         >
-          <AlbumCard :album="album" />
+        <AlbumCard :album="album" />
         </v-col>
       </v-row>
     </v-container>
@@ -26,18 +34,20 @@
 import { mapState } from 'vuex';
 import AlbumCard from '@/components/albums/AlbumCard.vue';
 import SearchBar from '@/components/albums/SearchBar.vue';
+import Categories from '@/components/albums/Categories.vue';
 
 export default {
   name: 'albums',
   components: {
+    Categories,
     AlbumCard,
     SearchBar,
   },
-  data: () => ({
-    info: null,
-  }),
   computed: {
     ...mapState(['albums']),
+    filters() {
+      return this.$store.getters.getFilters;
+    },
   },
   mounted() {
     this.$store.dispatch('fetchTopAlbums');
@@ -45,6 +55,12 @@ export default {
   methods: {
     filterByText(text) {
       this.$store.dispatch('filterByText', text);
+    },
+    clearAlbums() {
+      this.$store.dispatch('clearAlbums');
+    },
+    filterByCategory(id) {
+      this.$store.dispatch('filterByCategory', id);
     },
   },
 };

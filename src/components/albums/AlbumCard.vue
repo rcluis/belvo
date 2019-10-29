@@ -1,12 +1,13 @@
 <template>
   <v-card
     dark
+    @click="openAlbum(album.id.attributes['im:id'])"
   >
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
         <v-card-title
           class="headline"
-          v-text="album.title.label"
+          v-text="album['im:name'].label"
         ></v-card-title>
 
         <v-card-subtitle v-text="album['im:artist'].label"></v-card-subtitle>
@@ -27,6 +28,11 @@
 export default {
   props: {
     album: Object,
+  },
+  methods: {
+    openAlbum(id) {
+      this.$router.push({ name: 'album', params: { id } });
+    },
   },
 };
 </script>
