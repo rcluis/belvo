@@ -6,15 +6,15 @@
         <v-col cols="10">
           <SearchBar
             @filterByText="filterByText"
-            @clearSearchFilter="clearAlbums"
-          ></SearchBar>
+            @clearSearchFilter="clearAlbums">
+          </SearchBar>
         </v-col>
         <v-col cols="2">
           <Categories
             :filters="filters"
             @filterByCategory="filterByCategory"
-            @clearCategoryFilter="clearAlbums"
-          ></Categories>
+            @clearCategoryFilter="clearAlbums">
+          </Categories>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -22,22 +22,23 @@
           xl="5"
           sm="12"
           v-for="album in paginatedAlbums"
-          :key="album.id.attributes['im:id']"
-        >
+          :key="album.id.attributes['im:id']">
           <AlbumCard :album="album"></AlbumCard>
         </v-col>
         <v-col cols="12">
           <v-pagination
             v-model="page"
             :length="totalPages"
-            circle
-          ></v-pagination>
+            circle>
+          </v-pagination>
         </v-col>
         <v-col
           v-if="albums.length === 0"
           cols="12"
           class="text-center">
-          <p>There are no albums with the searched criteria</p>
+          <p>
+            There are no albums with the searched criteria
+          </p>
         </v-col>
       </v-row>
     </v-container>

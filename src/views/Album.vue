@@ -1,18 +1,19 @@
 <template>
-  <v-container
-    flex-wrap
-    >
+  <v-container flex-wrap>
     <v-row justify="center">
       <v-col>
         <AlbumInfoCard
           v-if="albumInfo"
-          :info="albumInfo"></AlbumInfoCard>
+          :info="albumInfo">
+        </AlbumInfoCard>
       </v-col>
       <v-col
         v-if="!albumInfo"
         cols="12"
         class="text-center">
-        <p> This album does not exist</p>
+        <p>
+          This album does not exist
+        </p>
       </v-col>
     </v-row>
   </v-container>

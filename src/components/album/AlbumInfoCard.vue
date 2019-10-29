@@ -22,8 +22,8 @@
             class="album__img"
             :alt="info['im:name'].label"
             :src="info['im:image'][2].label"
-            contain
-          ></v-img>
+            contain>
+          </v-img>
         </v-card>
         <p class="mt-2">
           <span class="body-1">
@@ -41,8 +41,7 @@
     <v-card-actions class="pa-0">
       <v-btn
         outlined
-        @click="goToAlbum(info.link.attributes.href)"
-      >
+        @click="goToAlbum(info.link.attributes.href)">
         Go to album
       </v-btn>
     </v-card-actions>

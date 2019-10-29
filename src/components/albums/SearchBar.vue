@@ -10,8 +10,7 @@
     append-icon="mdi-magnify"
     class="search-bar"
     @click:append="filterByText"
-    @click:clear="clearSearchFilter"
-    >
+    @click:clear="clearSearchFilter">
   </v-text-field>
 </template>
 
