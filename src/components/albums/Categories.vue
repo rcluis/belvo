@@ -4,12 +4,18 @@
       bottom
       transition="scale-transition"
     >
-      <template v-slot:activator="{ on }">
-        <v-btn v-on="on" icon :color="isFilterSelected ? 'primary' : 'grey'">
+      <template
+        v-slot:activator="{ on }">
+        <v-btn
+          v-if="!isFilterSelected"
+          v-on="on"
+          icon
+          color="primary"
+        >
           <v-icon>mdi-filter</v-icon>
         </v-btn>
         <v-btn
-          :disabled="!isFilterSelected"
+          v-else
           icon
           color="grey"
           @click="clearCategoryFilter"
@@ -18,7 +24,7 @@
         </v-btn>
       </template>
 
-      <v-list>
+      <v-list class="categories__list">
         <v-list-item
           v-for="filter in filters"
           :key="filter.id"
@@ -34,6 +40,10 @@
 <style lang="scss">
   .categories {
     text-align: right;
+  }
+  .categories__list {
+    max-height: 300px;
+    overflow-y: scroll;
   }
 </style>
 

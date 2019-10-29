@@ -7,14 +7,14 @@
           <SearchBar
             @filterByText="filterByText"
             @clearSearchFilter="clearAlbums"
-          />
+          ></SearchBar>
         </v-col>
         <v-col cols="2">
           <Categories
             :filters="filters"
             @filterByCategory="filterByCategory"
             @clearCategoryFilter="clearAlbums"
-          />
+          ></Categories>
         </v-col>
       </v-row>
       <v-row justify="space-between">
@@ -24,8 +24,15 @@
           v-for="album in albums"
           :key="album.id.attributes['im:id']"
         >
-        <AlbumCard :album="album" />
+          <AlbumCard :album="album"></AlbumCard>
         </v-col>
+        <v-col
+          v-if="albums.length === 0"
+          cols="12"
+          class="text-center">
+          <p>There are no albums with the searched criteria</p>
+        </v-col>
+
       </v-row>
     </v-container>
 </template>

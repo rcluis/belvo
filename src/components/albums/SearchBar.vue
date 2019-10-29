@@ -1,6 +1,7 @@
 <template>
   <v-text-field
     v-model=filterText
+    placeholder="Type an album"
     filled
     dense
     solo

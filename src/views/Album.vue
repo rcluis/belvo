@@ -4,7 +4,15 @@
     >
     <v-row justify="center">
       <v-col>
-          <AlbumInfoCard v-if="albumInfo"  :info="albumInfo" />
+        <AlbumInfoCard
+          v-if="albumInfo"
+          :info="albumInfo"></AlbumInfoCard>
+      </v-col>
+      <v-col
+        v-if="!albumInfo"
+        cols="12"
+        class="text-center">
+        <p> This album does not exist</p>
       </v-col>
     </v-row>
   </v-container>
@@ -30,6 +38,11 @@ export default {
         return albumId === id;
       });
     },
+  },
+  mounted() {
+    if (this.albums.length === 0) {
+      this.$store.dispatch('fetchTopAlbums');
+    }
   },
 };
 </script>
